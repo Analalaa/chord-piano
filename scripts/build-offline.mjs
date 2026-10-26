@@ -5,6 +5,6 @@ const css=await readFile(new URL('style.css',base),'utf8');
 const modules=await Promise.all(['music.js','lessons.js','app.js'].map(name=>readFile(new URL(name,base),'utf8')));
 const strip=source=>source.replace(/^import .*?;\s*$/gm,'').replace(/\bexport\s+(?=(?:const|function|class)\b)/g,'');
 const js=`const PianoMusic=(()=>{${strip(modules[0])};return {ROOTS,CHORDS,getChord,getVoicing,getInversionOptions};})();\nconst PianoLessons=(()=>{${strip(modules[1])};return {COMPARISONS,PROGRESSIONS,COURSES,CORRECTIONS,SOURCES};})();\n(()=>{const {ROOTS,CHORDS,getChord,getVoicing,getInversionOptions}=PianoMusic;const {COMPARISONS,PROGRESSIONS,COURSES,CORRECTIONS,SOURCES}=PianoLessons;${strip(modules[2])}})();`;
-html=html.replace('<link rel="stylesheet" href="./style.css">',()=>`<style>${css}</style>`).replace('<script type="module" src="./app.js"></script>',()=>`<script type="module">${js.replaceAll('</script','<\\/script')}</script>`);
+html=html.replace(/<link rel="stylesheet" href="\.\/style\.css(?:\?[^\"]*)?">/,()=>`<style>${css}</style>`).replace('<script type="module" src="./app.js"></script>',()=>`<script type="module">${js.replaceAll('</script','<\\/script')}</script>`);
 await writeFile(new URL('../piano-chord-map-offline.html',import.meta.url),html);
 console.log('Built piano-chord-map-offline.html');

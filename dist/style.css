@@ -332,6 +332,13 @@ td button { background: none; border: 0; padding: 0; text-align: left; font: inh
 .card-top .card-symbol { font-family: var(--mono); }
 .mini-piano { width: 100%; margin: 15px 0 0; min-height: 75px; }
 .mini-piano svg { width: 100%; display: block; margin: 0; }
+.mini-piano rect { stroke-width: 1; vector-effect: non-scaling-stroke; }
+.mini-piano .mini-white { fill: var(--white); stroke: #d9d5cc; }
+.mini-piano .mini-black { fill: var(--ink); stroke: #151923; }
+.mini-piano .mini-white.mini-hit.mini-right { fill: #e2d9ee; stroke: var(--guide); }
+.mini-piano .mini-black.mini-hit.mini-right { fill: var(--guide); stroke: #5d4c7a; }
+.mini-piano .mini-white.mini-hit.mini-left { fill: #f2d8c7; stroke: var(--root); }
+.mini-piano .mini-black.mini-hit.mini-left { fill: var(--root); stroke: #86513e; }
 .inversion-notes { display: block; line-height: 1.8; overflow-wrap: anywhere; }
 .inversion-bass { display: block; color: var(--guide); font-size: 10px; margin-top: 7px; }
 .progression-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 13px; }
