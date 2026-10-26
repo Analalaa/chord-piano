@@ -1,0 +1,12 @@
+{
+  "name": "piano-chord-map",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test music.test.mjs lessons.test.mjs",
+    "build": "node scripts/build-offline.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

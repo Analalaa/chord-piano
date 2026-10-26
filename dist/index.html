@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252a3d">
+  <meta name="description" content="钢琴和弦学习与实践：从组成音到转位、双手排列与声部连接，支持12个根音、和弦试听、节拍跟练和点键答题。">
+  <title>和弦地图 · 钢琴练习室</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23252a3d'/%3E%3Cpath d='M14 16h36v34H14z' fill='%23faf8f2'/%3E%3Cpath d='M26 16v34M38 16v34' stroke='%23252a3d'/%3E%3Cpath d='M22 16h8v20h-8zm12 0h8v20h-8z' fill='%23d98265'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#lab">跳到键盘实验室</a>
+  <header class="site-header">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>和弦地图<small>PIANO STUDY</small></span></a>
+    <nav aria-label="页面导航"><a href="#lab">键盘实验室</a><a href="#connection">声部连接</a><a href="#practice">跟着练</a><a href="#theory">原理小抄</a></nav>
+    <button class="quiet-button" id="print-page" type="button">打印对照 ↗</button>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div><p class="eyebrow">从听懂一个音，到弹好一段进行</p><h1>把和弦，<em>弹明白。</em></h1><p class="hero-copy">在琴键上看见构成，听见差别。<br class="mobile-break">再把它变成双手能弹出来的音乐。</p><a class="hero-link" href="#practice">从第一课开始 <span aria-hidden="true">↗</span></a></div>
+      <div class="hero-note"><span class="small-label">今天先记住</span><p>三音定大小，<br>七音辨性质，<br><span>下一个音，决定去向。</span></p><span class="edition">A SMALL ATLAS OF HARMONY / 01</span></div>
+    </section>
+
+    <section id="lab" class="lab panel" aria-labelledby="lab-title">
+      <div class="panel-heading"><div><p class="eyebrow">01 / 看见构成</p><h2 id="lab-title">键盘实验室</h2></div><span class="section-index">EXPLORE & LISTEN</span></div>
+      <div class="selector-area">
+        <div class="root-field"><span class="field-caption">选择根音</span><div id="root-picker" class="root-picker" role="group" aria-label="选择根音"></div></div>
+        <label class="type-field"><span class="field-caption">选择和弦</span><select id="chord-type" aria-label="和弦类型"></select></label>
+      </div>
+      <div id="family-picker" class="family-picker" role="group" aria-label="筛选和弦家族"></div>
+      <div class="chord-overview"><div class="chord-heading"><span class="small-label" id="family-label"></span><h3><span id="chord-symbol">C</span><span id="chord-name">大三和弦</span></h3><p id="chord-description"></p></div><div class="tone-area"><span class="field-caption">理论构成 / 数字相对于和弦根音</span><div class="tone-chips" id="tone-chips"></div></div></div>
+      <div class="keyboard-toolbar"><div class="control-group"><div class="segmented" id="voicing-mode" role="group" aria-label="和弦排列"><button type="button" data-mode="close" aria-pressed="true">完整构成</button><button type="button" data-mode="split" aria-pressed="false">双手实用</button></div><label class="inline-field">转位<select id="inversion-select" aria-label="转位"></select></label></div><div class="control-group"><label class="inline-field">标记<select id="label-select"><option value="both">音名＋度数</option><option value="note">音名</option><option value="degree">度数</option></select></label><label class="check-label"><input type="checkbox" id="guide-only">聚焦三音与七音</label></div></div>
+      <div class="keyboard-caption"><span id="voicing-caption"></span><span class="keyboard-hint">点琴键可试听 · 窄屏左右滑动</span></div>
+      <div class="piano-scroll" id="lab-scroll"><div class="piano-keyboard" id="main-piano" role="group" aria-label="钢琴键盘，C2到C6"></div></div>
+      <div class="keyboard-footer"><div class="legend"><span><i class="legend-left"></i>左手</span><span><i class="legend-right"></i>右手</span><span><i class="legend-guide"></i>点标记：三音 / 七音</span></div><div class="audio-actions"><button class="button button-dark" id="play-chord" type="button">▶ 和弦试听</button><button class="button" id="play-arp" type="button">分解试听</button><button class="text-button" id="stop-audio" type="button">停止</button></div></div>
+      <div class="voicing-detail"><span id="played-notes"></span><span id="omitted-notes"></span></div>
+      <p id="chord-tip" class="chord-tip"></p><p class="status-line" id="lab-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="study-section" id="compare" aria-labelledby="compare-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / 只改变一个条件</p><h2 id="compare-title">差一个音，差在哪里？</h2></div><label class="inline-field">对比<select id="comparison-select" aria-label="选择和弦对比"></select></label></div>
+      <div class="comparison-grid" id="comparison-cards"></div><div class="comparison-bottom"><p id="comparison-explanation"></p><button class="button" id="play-comparison" type="button">▶ 按顺序听 A → B</button></div>
+    </section>
+
+    <section id="inversions" class="study-section" aria-labelledby="inversion-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / 同一组音，换一个最低音</p><h2 id="inversion-title">转位，让手少走一点路</h2></div><span class="subtle-tag" id="inversion-current">C</span></div>
+      <p class="section-description">转位看实际最低音。点选下面的排列，再到主键盘比较；先弹最低音，再弹整个和弦。</p><div class="inversion-grid" id="inversion-cards"></div>
+    </section>
+
+    <section id="connection" class="study-section" aria-labelledby="connection-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / 给每个声音一个去向</p><h2 id="connection-title">和弦之间，发生了什么？</h2></div><label class="inline-field">进行<select id="progression-select" aria-label="选择和弦进行"></select></label></div>
+      <p class="section-description" id="progression-subtitle"></p><div class="progression-grid" id="progression-cards"></div>
+      <div class="connection-panel"><div><span class="field-caption">关注这些声部</span><div class="motion-list" id="motion-list"></div><p id="progression-explanation"></p></div><div class="transport"><label class="inline-field">速度<input type="number" id="progression-bpm" min="40" max="140" value="60" inputmode="numeric"> BPM</label><button class="button button-dark" id="play-progression" type="button">▶ 每四拍换和弦</button><button class="button" id="stop-progression" type="button">停止</button><label class="check-label"><input type="checkbox" id="progression-loop">循环</label><span class="transport-status" id="progression-status" role="status" aria-live="polite"></span></div></div>
+      <div class="progression-keyboard" hidden id="progression-preview"><div class="keyboard-caption"><span id="progression-current"></span><span>左手低音 · 右手连接</span></div><div class="piano-scroll"><div class="piano-keyboard" id="progression-piano" role="group" aria-label="当前进行和弦的实际琴键"></div></div></div>
+    </section>
+
+    <section id="practice" class="study-section" aria-labelledby="practice-title">
+      <div class="section-heading"><div><p class="eyebrow">05 / 每次十五分钟，把理解变成动作</p><h2 id="practice-title">坐到琴前，跟着练</h2></div><span class="subtle-tag" id="practice-progress">完成 0 / 0</span></div>
+      <div class="practice-layout"><div class="course-list" id="course-list" role="group" aria-label="选择练习课程"></div><div class="practice-main panel"><div class="lesson-heading"><span class="small-label" id="lesson-position"></span><h3 id="lesson-title"></h3><p id="lesson-body"></p></div><div class="lesson-target"><span id="lesson-chord"></span><span id="lesson-goal"></span></div><div class="practice-actions"><button class="button" id="lesson-listen" type="button">▶ 听示范</button><button class="button" id="lesson-hint" type="button">显示琴键提示</button><button class="text-button" id="lesson-clear" type="button">清空选择</button></div><p class="practice-keyboard-hint" id="practice-instruction">在下面的键盘选出和弦音，再检查。</p><div class="piano-scroll" id="practice-scroll"><div class="piano-keyboard" id="practice-piano" role="group" aria-label="练习答题键盘，点击选择或取消琴键"></div></div><div class="answer-row"><button class="button button-dark" type="button" id="check-answer">检查所选音</button><p id="answer-feedback" role="status" aria-live="polite"></p></div><div class="practice-metronome"><label class="inline-field">跟练速度<input id="practice-bpm" type="number" min="40" max="140" value="60" inputmode="numeric"> BPM</label><button class="button" id="metronome-button" type="button" aria-pressed="false">开启节拍器</button><div class="beat-dots" id="beat-dots" aria-label="四拍节奏"><i></i><i></i><i></i><i></i></div></div><div class="lesson-footer"><button class="text-button" type="button" id="previous-lesson">← 上一步</button><button class="button button-dark" type="button" id="next-lesson">完成这一步，继续 →</button></div><p class="practice-note">键盘答题检查音级；实体钢琴练习请同时留意音区、左右手与节奏。示范使用合成音。</p></div></div>
+    </section>
+
+    <section id="theory" class="study-section theory-section" aria-labelledby="theory-title"><div class="section-heading"><div><p class="eyebrow">06 / 带着问题回看原理</p><h2 id="theory-title">放在琴谱旁的小抄</h2></div><a class="text-button" href="https://github.com/Analalaa/chord-map" target="_blank" rel="noreferrer">吉他版参考 ↗</a></div><div class="theory-grid" id="theory-grid"></div><details class="catalog-details"><summary>展开完整和弦对照表 <span>随上方根音变化</span></summary><div class="table-scroll"><table><thead><tr><th scope="col">和弦</th><th scope="col">名称</th><th scope="col">音程公式</th><th scope="col">构成音</th></tr></thead><tbody id="chord-table"></tbody></table></div></details><details class="source-details"><summary>内容来源与阅读说明</summary><div id="source-list"></div><p>本页参考和弦笔记与 Chord Map，将理论转为钢琴练习，并修正部分构造与记号。和弦听感受排列、音区与上下文影响；“回避音”不是普遍禁令。练习进度只保存在当前浏览器。</p></details></section>
+  </main>
+  <footer><a class="footer-brand" href="#top">和弦地图 <span>/</span> 钢琴练习室</a><span>先听见，再理解，最后弹出来。</span></footer>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
